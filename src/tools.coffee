@@ -53,3 +53,23 @@ exports.versionMid = (packagePath, resourceName) ->
     fs.readFile packagePath, "utf8", (err, data) ->
       return res.send(400, err.toString())  if err
       res.json version: JSON.parse(data).version
+
+exports.replaceContentTypeMiddleware = (contentTypeMap) ->
+  hasBody = (req) -> "transfer-encoding" of req.headers || "content-length" of req.headers
+  (req, res, next) ->
+    if hasBody(req)
+      oldContentType = req.headers["content-type"] || ""
+      newContentType = contentTypeMap[oldContentType]
+      req.headers["content-type"] = newContentType if newContentType
+    next()
+
+exports.corsMiddleware = ->
+  (req, res, next) ->
+    res.header "Access-Control-Allow-Origin", "*"
+    res.header "Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS"
+    res.header "Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With, Cache-Control"
+    res.header "Access-Control-Allow-Credentials", "true"
+    if req.method == "OPTIONS"
+      res.send(200)
+    else
+      next()

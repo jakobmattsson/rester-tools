@@ -2,14 +2,14 @@
   "name": "rester-tools",
   "description": "Utility functions for users of the rester-module",
   "main": "./lib/tools.js",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "author": {
     "name": "Jakob Mattsson",
     "email": "jakob.mattsson@gmail.com",
     "url": "jakobmattsson.se"
   },
   "engines": {
-    "npm": "1.1.x",
+    "npm": "1.x.x",
     "node": "0.8.x"
   },
   "scripts": {
