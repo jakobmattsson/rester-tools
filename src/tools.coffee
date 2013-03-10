@@ -4,9 +4,12 @@ _ = require 'underscore'
 
 exports.authenticateWithBasicAuthAndLocke = (locke, appName) ->
   (req, callback) ->
-    return callback(null, null) if !req.headers.authorization
-    code = req.headers.authorization.slice(6)
-    [username, token] = new Buffer(code, "base64").toString("ascii").split(":")
+    {username, token} = req.query
+
+    if !username? || !token?
+      return callback(null, null) if !req.headers.authorization
+      code = req.headers.authorization.slice(6)
+      [username, token] = new Buffer(code, "base64").toString("ascii").split(":")
 
     locke.authToken appName, username, token, (err, res) ->
       return callback(err) if err
