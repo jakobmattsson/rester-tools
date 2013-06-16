@@ -12,7 +12,7 @@ exports.authenticateWithBasicAuthAndLocke = (locke, appName) ->
       [username, token] = new Buffer(code, "base64").toString("ascii").split(":")
 
     locke.authToken appName, username, token, (err, res) ->
-      return callback(err) if err
+      return callback(null, null) if err
       callback(null, username)
 
 
