@@ -22,7 +22,7 @@ exports.getAuthorizationData = (db, authDatas) ->
     async.map authDatas, ((dd, callback) ->
       uu = undefined
       uu = _.object([[dd.usernameProperty, username]])
-      db.list dd.table, uu, (err, rr) ->
+      db.list dd.table, { filter: uu }, (err, rr) ->
         callback err, (rr or []).map(dd.callback)
 
     ), (err, results) ->
