@@ -1,7 +1,7 @@
 {
   "name": "rester-tools",
   "description": "Utility functions for users of the rester-module",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "main": "./lib/tools.js",
   "author": "Jakob Mattsson <jakob.mattsson@gmail.com> (jakobmattsson.se)",
   "license": "MIT",
